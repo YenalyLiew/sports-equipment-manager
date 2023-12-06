@@ -1,6 +1,6 @@
 package com.sports_equipment.manager.repos;
 
-import com.sports_equipment.manager.entity.Book;
+import com.sports_equipment.manager.entity.Equipment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,12 +10,13 @@ import org.springframework.stereotype.Repository;
  * @Author by 尘心
  */
 @Repository
-public interface BookRepository extends JpaRepository<Book,Integer> {
+public interface EquipmentRepository extends JpaRepository<Equipment, Integer> {
 
     /**
      * ISBN编码查询
+     *
      * @param isbn
      * @return
      */
-    Book findByIsbn(String isbn);
+    Equipment findByEquipmentId(String isbn);
 }

@@ -9,11 +9,11 @@ import lombok.Data;
  * @Author by 尘心
  */
 @Data
-public class RetBookIn {
+public class RetEquipmentIn {
 
     @ApiModelProperty("用户ID")
     private Integer userId;
 
-    @ApiModelProperty("图书ID")
-    private Integer bookId;
+    @ApiModelProperty("器材ID")
+    private Integer equipmentId;
 }

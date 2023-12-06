@@ -32,10 +32,10 @@ public class Borrow {
     @ApiModelProperty("用户ID")
     private Integer userId;
 
-    @ApiModelProperty("图书ID")
-    private Integer bookId;
+    @ApiModelProperty("器材ID")
+    private Integer equipmentId;
 
-    @ApiModelProperty("借阅时间")
+    @ApiModelProperty("借用时间")
     private Date createTime;
 
     @ApiModelProperty("归还时间")

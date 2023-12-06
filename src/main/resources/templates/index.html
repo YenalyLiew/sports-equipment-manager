@@ -29,7 +29,7 @@
 	<div class="admin-navbar">
 		<div class="admin-container-fluid clear">
 			<!--logo名称-->
-			<div class="admin-logo">图书管理系统</div>			
+			<div class="admin-logo">体育器材自助平台</div>			
 			
 			<!--右侧-->
 			<ul class="admin-navbar-nav fr">
@@ -57,19 +57,19 @@
 							</li>
 
 							<li class="menu-item">
-                                <a href="javascript:;">图书管理<i class="icon-keyboard_arrow_left"></i></a>
+                                <a href="javascript:;">器材管理<i class="icon-keyboard_arrow_left"></i></a>
                                 <ul>
-									<li><a id="book-list" href="javascript:page('book/book-list');">图书列表</a></li>
-									<li><a id="add-book" href="javascript:page('book/book-add');">图书上架</a></li>
+									<li><a id="equipment-list" href="javascript:page('equipment/equipment-list');">器材列表</a></li>
+									<li><a id="add-equipment" href="javascript:page('equipment/equipment-add');">器材入库</a></li>
 								</ul>
                             </li>
                             
 							<li class="menu-item">
 								<a href="javascript:;">借阅管理<i class="icon-keyboard_arrow_left"></i></a>
 								<ul>
-									<li><a id="book-search" href="javascript:page('borrow/book-search');">搜索图书</a></li>
-                                    <li><a id="book-borrow" href="javascript:page('borrow/borrow');">借阅图书</a></li>
-                                    <li><a id="book-back" href="javascript:page('borrow/back');">归还图书</a></li>
+									<li><a id="equipment-search" href="javascript:page('borrow/equipment-search');">搜索体育器材</a></li>
+                                    <li><a id="equipment-borrow" href="javascript:page('borrow/borrow');">借用器材</a></li>
+                                    <li><a id="equipment-back" href="javascript:page('borrow/back');">归还器材</a></li>
 								</ul>
                             </li>
 
@@ -142,7 +142,7 @@
                 if (auth != 0) {
                     console.log(auth);
                     // 若为普通用户权限, 则无法访问修改类菜单 无法添加图书,添加读者,管理用户以及添加管理员
-					$("#add-book").hide();
+					$("#add-equipment").hide();
 					$("#reader-add").hide();
 					$("#user-manage").hide();
 					$("#admin-add").hide();

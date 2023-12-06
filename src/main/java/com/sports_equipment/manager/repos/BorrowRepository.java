@@ -13,10 +13,11 @@ import java.util.List;
  * @Author by 尘心
  */
 @Repository
-public interface BorrowRepository extends JpaRepository<Borrow,Integer>{
+public interface BorrowRepository extends JpaRepository<Borrow, Integer> {
 
     /**
      * 查询借阅信息
+     *
      * @param userId 用户id
      * @return
      */
@@ -24,16 +25,18 @@ public interface BorrowRepository extends JpaRepository<Borrow,Integer>{
 
     /**
      * 查询已借阅信息
+     *
      * @param userId 用户id
-     * @param ret 是否归还, 0 已归还/ 1 未归还
+     * @param ret    是否归还, 0 已归还/ 1 未归还
      * @return
      */
-    List<Borrow> findBorrowsByUserIdAndRet(@Param("userId") Integer userId,@Param("ret")Integer ret);
+    List<Borrow> findBorrowsByUserIdAndRet(@Param("userId") Integer userId, @Param("ret") Integer ret);
 
     /**
      * 查询用户某一条借阅信息
+     *
      * @param userId 用户id
-     * @param bookId 图书id
+     * @param equipmentId 图书id
      */
-    Borrow findBorrowByUserIdAndBookId(@Param("userId") Integer userId, @Param("bookId") Integer bookId);
+    Borrow findBorrowByUserIdAndEquipmentId(@Param("userId") Integer userId, @Param("equipmentId") Integer equipmentId);
 }

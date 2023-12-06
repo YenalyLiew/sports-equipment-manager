@@ -2,7 +2,7 @@ package com.sports_equipment.manager.controller;
 
 import cn.hutool.core.date.DateUtil;
 import com.sports_equipment.manager.entity.Borrow;
-import com.sports_equipment.manager.service.BookService;
+import com.sports_equipment.manager.service.EquipmentService;
 import com.sports_equipment.manager.service.BorrowService;
 import com.sports_equipment.manager.util.R;
 import com.sports_equipment.manager.util.consts.Constants;
@@ -24,7 +24,7 @@ import java.util.List;
  * @Date 2020/7/14 16:35
  * @Author by 尘心
  */
-@Api(tags = "借阅管理")
+@Api(tags = "借用管理")
 @RestController
 @RequestMapping("/borrow")
 public class BorrowController {
@@ -33,39 +33,39 @@ public class BorrowController {
     private BorrowService borrowService;
 
     @Autowired
-    private BookService bookService;
+    private EquipmentService equipmentService;
 
-    @ApiOperation("借阅列表")
+    @ApiOperation("借用列表")
     @GetMapping("/list")
     public R getBorrowList(Integer userId) {
-        return R.success(CodeEnum.SUCCESS,borrowService.findAllBorrowByUserId(userId));
+        return R.success(CodeEnum.SUCCESS, borrowService.findAllBorrowByUserId(userId));
     }
 
-    @ApiOperation("借阅图书")
+    @ApiOperation("借用器材")
     @PostMapping("/add")
     public R addBorrow(@RequestBody Borrow borrow) {
         Integer result = borrowService.addBorrow(borrow);
         if (result == Constants.BOOK_BORROWED) {
             return R.success(CodeEnum.BOOK_BORROWED);
-        }else if (result == Constants.USER_SIZE_NOT_ENOUGH) {
+        } else if (result == Constants.USER_SIZE_NOT_ENOUGH) {
             return R.success(CodeEnum.USER_NOT_ENOUGH);
-        }else if (result == Constants.BOOK_SIZE_NOT_ENOUGH) {
+        } else if (result == Constants.BOOK_SIZE_NOT_ENOUGH) {
             return R.success(CodeEnum.BOOK_NOT_ENOUGH);
         }
-        return R.success(CodeEnum.SUCCESS,Constants.OK);
+        return R.success(CodeEnum.SUCCESS, Constants.OK);
     }
 
-    @ApiOperation("编辑借阅")
+    @ApiOperation("编辑借用")
     @PostMapping("/update")
     public R modifyBorrow(@RequestBody Borrow borrow) {
-        return R.success(CodeEnum.SUCCESS,borrowService.updateBorrow(borrow));
+        return R.success(CodeEnum.SUCCESS, borrowService.updateBorrow(borrow));
     }
 
 
-    @ApiOperation("借阅详情")
+    @ApiOperation("借用详情")
     @GetMapping("/detail")
     public R borrowDetail(Integer id) {
-        return R.success(CodeEnum.SUCCESS,borrowService.findById(id));
+        return R.success(CodeEnum.SUCCESS, borrowService.findById(id));
     }
 
     @ApiOperation("删除归还记录")
@@ -76,28 +76,28 @@ public class BorrowController {
     }
 
 
-    @ApiOperation("已借阅列表")
+    @ApiOperation("已借用列表")
     @GetMapping("/borrowed")
     public R borrowedList(Integer userId) {
         List<BackOut> outs = new ArrayList<>();
-        if (userId!=null&&userId>0) {
-            // 获取所有 已借阅 未归还书籍
+        if (userId != null && userId > 0) {
+            // 获取所有 已借用 未归还书籍
             List<Borrow> borrows = borrowService.findBorrowsByUserIdAndRet(userId, Constants.NO);
             for (Borrow borrow : borrows) {
                 BackOut backOut = new BackOut();
-                BookOut out = bookService.findBookById(borrow.getBookId());
-                BeanUtils.copyProperties(out,backOut);
+                BookOut out = equipmentService.findEquipmentById(borrow.getEquipmentId());
+                BeanUtils.copyProperties(out, backOut);
 
-                backOut.setBorrowTime(DateUtil.format(borrow.getCreateTime(),Constants.DATE_FORMAT));
+                backOut.setBorrowTime(DateUtil.format(borrow.getCreateTime(), Constants.DATE_FORMAT));
 
                 String endTimeStr = DateUtil.format(borrow.getEndTime(), Constants.DATE_FORMAT);
                 backOut.setEndTime(endTimeStr);
                 // 判断是否逾期
                 String toDay = DateUtil.format(new Date(), Constants.DATE_FORMAT);
                 int i = toDay.compareTo(endTimeStr);
-                if (i>0) {
+                if (i > 0) {
                     backOut.setLate(Constants.YES_STR);
-                }else {
+                } else {
                     backOut.setLate(Constants.NO_STR);
                 }
 
@@ -105,14 +105,14 @@ public class BorrowController {
             }
         }
 
-        return R.success(CodeEnum.SUCCESS,outs);
+        return R.success(CodeEnum.SUCCESS, outs);
     }
 
-    @ApiOperation("归还书籍")
+    @ApiOperation("归还器材")
     @PostMapping("/ret")
     public R retBook(Integer userId, Integer bookId) {
         // 归还图书
-        borrowService.retBook(userId,bookId);
+        borrowService.retBook(userId, bookId);
         return R.success(CodeEnum.SUCCESS);
     }
 

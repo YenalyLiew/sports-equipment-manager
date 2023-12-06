@@ -21,8 +21,8 @@ public interface BorrowMapper {
     @Update("update borrow set user_id = #{userId},book_id = #{bookId},update_time = #{updateTime} where id = #{id}")
     int updateBorrow(Borrow borrow);
 
-    @Select("select * from borrow where user_id = #{userId} and book_id = #{bookId}")
-    Borrow findBorrowByUserIdAndBookId(@Param("userId") Integer userId, @Param("bookId") Integer bookId);
+    @Select("select * from borrow where user_id = #{userId} and equipment_id = #{eqId}")
+    Borrow findBorrowByUserIdAndEquipmentId(@Param("userId") Integer userId, @Param("bookId") Integer eqId);
 
-    int updateBor(Map<String,Object> map);
+    int updateBor(Map<String, Object> map);
 }

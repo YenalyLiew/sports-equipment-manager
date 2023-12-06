@@ -28,7 +28,7 @@ import java.util.Optional;
  * @Author by 尘心
  */
 @Service
-public class UserService implements UserDetailsService{
+public class UserService implements UserDetailsService {
 
     @Autowired
     private UsersRepository usersRepository;
@@ -42,6 +42,7 @@ public class UserService implements UserDetailsService{
 
     /**
      * 添加用户
+     *
      * @param users 用户
      * @return 返回添加的用户
      */
@@ -51,16 +52,18 @@ public class UserService implements UserDetailsService{
 
     /**
      * 编辑用户
+     *
      * @param users 用户对象
      * @return true or false
      */
     @Transactional(rollbackFor = Exception.class)
     public boolean updateUser(Users users) {
-        return usersMapper.updateUsers(BeanUtil.beanToMap(users))>0;
+        return usersMapper.updateUsers(BeanUtil.beanToMap(users)) > 0;
     }
 
     /**
      * 用户详情
+     *
      * @param id 主键
      * @return 用户详情
      */
@@ -74,6 +77,7 @@ public class UserService implements UserDetailsService{
 
     /**
      * 删除用户
+     *
      * @param id 主键
      * @return true or false
      */
@@ -84,18 +88,20 @@ public class UserService implements UserDetailsService{
 
     /**
      * 用户搜索查询(mybatis 分页)
+     *
      * @param pageIn
      * @return
      */
     public PageInfo<Users> getUserList(PageIn pageIn) {
 
-        PageHelper.startPage(pageIn.getCurrPage(),pageIn.getPageSize());
+        PageHelper.startPage(pageIn.getCurrPage(), pageIn.getPageSize());
         List<Users> listByLike = usersMapper.findListByLike(pageIn.getKeyword());
         return new PageInfo<>(listByLike);
     }
 
     /**
      * 用户鉴权
+     *
      * @param username 用户名
      * @throws UsernameNotFoundException
      */
@@ -115,6 +121,7 @@ public class UserService implements UserDetailsService{
 
     /**
      * 用户名查询用户信息
+     *
      * @param username 用户名
      */
     public Users findByUsername(String username) {

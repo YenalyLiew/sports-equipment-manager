@@ -4,7 +4,7 @@
     <resultMap id="BaseResultMap" type="com.sports_equipment.manager.entity.Borrow" >
         <id column="id" property="id" jdbcType="INTEGER" />
         <result column="user_id" property="userId" jdbcType="INTEGER" />
-        <result column="book_id" property="bookId" jdbcType="INTEGER" />
+        <result column="equipment_id" property="equipmentId" jdbcType="INTEGER" />
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
         <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
@@ -15,22 +15,22 @@
         update borrow
         <set>
             <if test="userId != null">
-              user_id = #{userId},
+                user_id = #{userId},
             </if>
             <if test="bookId != null">
-              book_id = #{bookId},
+                book_id = #{bookId},
             </if>
             <if test="createTime != null">
-             create_time = #{createTime},
+                create_time = #{createTime},
             </if>
             <if test="endTime != null">
-             end_time = #{endTime},
+                end_time = #{endTime},
             </if>
             <if test="updateTime != null">
-             update_time = #{updateTime},
+                update_time = #{updateTime},
             </if>
             <if test="ret != null">
-             ret = #{ret},
+                ret = #{ret},
             </if>
         </set>
         where id = #{id}
