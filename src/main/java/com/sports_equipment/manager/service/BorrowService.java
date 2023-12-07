@@ -39,11 +39,11 @@ public class BorrowService {
      */
     @Transactional
     public Integer addBorrow(Borrow borrow) {
-        Equipment equipment = equipmentService.findEquipment(borrow.getId());
+        Equipment equipment = equipmentService.findEquipment(borrow.getEquipmentId());
         Users users = userService.findUserById(borrow.getUserId());
 
         // 查询是否已经借阅过该图书
-        Borrow bor = findBorrowByUserIdAndEquipmentId(users.getId(), equipment.getId());
+        Borrow bor = findBorrowByUserIdAndEquipmentId(users.getId(), equipment.getEquipmentId());
         if (bor != null) {
             Integer ret = bor.getRet();
             if (ret != null) {
@@ -134,7 +134,7 @@ public class BorrowService {
      * @param userId 用户id
      * @param equipmentId 图书id
      */
-    public Borrow findBorrowByUserIdAndEquipmentId(int userId, int equipmentId) {
+    public Borrow findBorrowByUserIdAndEquipmentId(int userId, String equipmentId) {
         return borrowMapper.findBorrowByUserIdAndEquipmentId(userId, equipmentId);
     }
 
@@ -145,7 +145,7 @@ public class BorrowService {
      * @param equipmentId 书籍id
      */
     @Transactional(rollbackFor = Exception.class)
-    public void retEquipment(int userId, int equipmentId) {
+    public void retEquipment(int userId, String equipmentId) {
         // 用户可借数量加1
         Users user = userService.findUserById(userId);
         Integer size = user.getSize();

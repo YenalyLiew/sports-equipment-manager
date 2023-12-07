@@ -92,6 +92,10 @@ public class EquipmentService {
         return out;
     }
 
+    public Equipment findEquipment(String isbn) {
+        return equipmentRepository.findFirstByEquipmentId(isbn);
+    }
+
     /**
      * 删除图书
      *

@@ -111,7 +111,7 @@ public class BorrowController {
 
     @ApiOperation("归还器材")
     @PostMapping("/ret")
-    public R retEquipment(Integer userId, int equipmentId) {
+    public R retEquipment(Integer userId, String equipmentId) {
         // 归还图书
         borrowService.retEquipment(userId, equipmentId);
         return R.success(CodeEnum.SUCCESS);

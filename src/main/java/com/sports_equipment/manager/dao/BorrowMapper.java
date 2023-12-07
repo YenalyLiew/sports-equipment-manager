@@ -22,7 +22,7 @@ public interface BorrowMapper {
     int updateBorrow(Borrow borrow);
 
     @Select("select * from borrow where user_id = #{userId} and equipment_id = #{equipmentId}")
-    Borrow findBorrowByUserIdAndEquipmentId(@Param("userId") Integer userId, @Param("equipmentId") Integer equipmentId);
+    Borrow findBorrowByUserIdAndEquipmentId(@Param("userId") Integer userId, @Param("equipmentId") String equipmentId);
 
     int updateBor(Map<String, Object> map);
 }
