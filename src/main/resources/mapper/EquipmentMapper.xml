@@ -24,7 +24,7 @@
 
 
     <update id="updateEquipment" parameterType="map">
-        update book
+        update equipment
         <set>
             <if test="equipment_id != null and equipment_id != ''">
                 equipment_id = #{equipment_id},

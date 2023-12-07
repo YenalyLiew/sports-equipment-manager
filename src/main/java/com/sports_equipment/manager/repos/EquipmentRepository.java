@@ -1,8 +1,11 @@
 package com.sports_equipment.manager.repos;
 
 import com.sports_equipment.manager.entity.Equipment;
+import com.sports_equipment.manager.util.vo.EquipmentOut;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @Description 书籍
@@ -12,11 +15,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EquipmentRepository extends JpaRepository<Equipment, Integer> {
 
-    /**
-     * ISBN编码查询
-     *
-     * @param isbn
-     * @return
-     */
-    Equipment findByEquipmentId(String isbn);
+    Equipment findFirstByEquipmentId(String equipmentId);
 }

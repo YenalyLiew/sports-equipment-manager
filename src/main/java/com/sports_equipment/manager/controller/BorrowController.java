@@ -2,13 +2,13 @@ package com.sports_equipment.manager.controller;
 
 import cn.hutool.core.date.DateUtil;
 import com.sports_equipment.manager.entity.Borrow;
-import com.sports_equipment.manager.service.EquipmentService;
 import com.sports_equipment.manager.service.BorrowService;
+import com.sports_equipment.manager.service.EquipmentService;
 import com.sports_equipment.manager.util.R;
 import com.sports_equipment.manager.util.consts.Constants;
 import com.sports_equipment.manager.util.http.CodeEnum;
-import com.sports_equipment.manager.util.vo.BackOut;
-import com.sports_equipment.manager.util.vo.BookOut;
+import com.sports_equipment.manager.util.vo.EquipmentBack;
+import com.sports_equipment.manager.util.vo.EquipmentOut;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
@@ -79,13 +79,14 @@ public class BorrowController {
     @ApiOperation("已借用列表")
     @GetMapping("/borrowed")
     public R borrowedList(Integer userId) {
-        List<BackOut> outs = new ArrayList<>();
+        List<EquipmentBack> outs = new ArrayList<>();
         if (userId != null && userId > 0) {
             // 获取所有 已借用 未归还书籍
             List<Borrow> borrows = borrowService.findBorrowsByUserIdAndRet(userId, Constants.NO);
             for (Borrow borrow : borrows) {
-                BackOut backOut = new BackOut();
-                BookOut out = equipmentService.findEquipmentById(borrow.getEquipmentId());
+                EquipmentBack backOut = new EquipmentBack();
+                EquipmentOut out = equipmentService.findEquipmentByIsbn(borrow.getEquipmentId());
+                System.out.println("!!!!!!!" + out);
                 BeanUtils.copyProperties(out, backOut);
 
                 backOut.setBorrowTime(DateUtil.format(borrow.getCreateTime(), Constants.DATE_FORMAT));
@@ -110,9 +111,9 @@ public class BorrowController {
 
     @ApiOperation("归还器材")
     @PostMapping("/ret")
-    public R retBook(Integer userId, Integer bookId) {
+    public R retEquipment(Integer userId, int equipmentId) {
         // 归还图书
-        borrowService.retBook(userId, bookId);
+        borrowService.retEquipment(userId, equipmentId);
         return R.success(CodeEnum.SUCCESS);
     }
 

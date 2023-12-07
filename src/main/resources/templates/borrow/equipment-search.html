@@ -27,7 +27,7 @@
     <!--块元素-->
     <div class="block">
         <!--页面有多个表格时，可以用于标识表格-->
-        <h2>器材列表</h2>
+        <h2>器材搜索</h2>
         <!--右上角的返回按钮-->
         <a href="javascript:history.back();">
             <button class="button indigo radius-3" style="position: absolute;right: 20px;top: 16px;"><span
@@ -38,9 +38,9 @@
         <!--正文内容-->
         <div class="main">
             <!--表格上方的搜索操作-->
-            <div class="admin-search">
+            <div class="main">
                 <div class="input-group">
-                    <input id="keyword" type="text" class="text" placeholder="提示信息"/>
+                    <input id="keyword" type="text" class="text" style="width: 400px" placeholder="搜索想要借阅的器材"/>
                     <button id="searchBtn" class="button blue" onclick="search();">搜索</button>
                 </div>
             </div>
@@ -96,6 +96,7 @@
     // 渲染数据表格
     function rander(currPage, keyword, pageSize) {
         // 定义全局 分页属性
+        var total = 0;
         $.ajax({
             //请求方式
             type: "POST",
@@ -110,11 +111,12 @@
                 console.log(result);
                 // 获取集合属性
                 var r = result.data;
-                var total = r.total;
-                var currPage = r.currPage;
-                var pageSize = r.pageSize;
                 // 分页信息
-                console.log("currPage:" + r.currPage + "\t pageSize:" + r.pageSize + "\t total:" + r.total);
+                currPage = r.currPage;
+                pageSize = r.pageSize;
+                total = r.total;
+
+                console.log("currPage:" + currPage + "pageSize:" + pageSize + "total:" + total);
 
                 var array = r.list;
                 var text = "";
@@ -123,14 +125,13 @@
                     var num = pageSize * (currPage - 1) + index + 1;
                     text += "<tr align='center'><td>" + num + "</td><td>" + value.equipmentId + "</td><td>" + value.name + "</td><td>" + value.supplier + "</td>" +
                         "<td>" + value.price + "</td><td>" + value.size + "</td><td>" + value.type + "</td><td>" + value.publishTime + "</td>" + "<td>" +
-                        "<button class='button blue empty' onclick='updateEquipment(" + value.id + ")'>编辑</button> &nbsp;<button class='button yellow empty' onclick='delEquipment(" + value.id + ")'>删除</button></td></tr>";
+                        "<button class='button blue empty' onclick='borrowEquipment(" + value.id + ")'>借用</button></td></tr>";
                 });
 
                 $("#tbody").html(text);
 
                 // 向上取整去总页数
                 var totalPage = Math.ceil(total / pageSize);
-                console.log("totalPage:" + totalPage);
                 // 清空分页组件
                 $("#page").empty();
                 // 调用分页组件
@@ -164,40 +165,20 @@
         rander(1, keyword, 10);
     }
 
-    // 编辑
-    function updateEquipment(id) {
-        console.log("update Equipment" + id);
-        window.location.href = "/equipment/equipment-update?id=" + id;
-    }
-
-    // 删除
-    function delEquipment(id) {
-        console.log("delete Equipment" + id);
+    // 借阅器材
+    function borrowEquipment(id) {
         javaex.confirm({
-            content: "确定要删除么",
-            callback: "delCallback(" + id + ")"
+            content: "确定要借用么",
+            callback: "forwardBorrow(" + id + ")"
         });
     }
 
-    function delCallback(id) {
-        // ajax
-        $.get("/equipment/delete", {"id": id},
-            function (data) {
-                var code = data.code;
-                if (code == 200) {
-                    javaex.message({
-                        content: "删除成功",
-                        type: "success"
-                    });
+    function forwardBorrow(id) {
 
-                    // 删除成功, 刷新页面
-                    setTimeout(function () {
-                        window.location.reload();
-                    }, 1500)
-                }
-            });
-        // 如果你想阻止弹出层关闭，直接 return false; 即可
-        //return false;
+        var url = "/borrow/borrow?id=" + id;
+        // 跳转借阅界面
+        window.location.href = "/borrow/borrow?id=" + id;
+        // $("#bb", parent.document).click();
     }
 </script>
 </body>

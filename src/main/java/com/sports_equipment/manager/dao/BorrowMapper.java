@@ -18,11 +18,11 @@ import java.util.Map;
 @Component
 public interface BorrowMapper {
 
-    @Update("update borrow set user_id = #{userId},book_id = #{bookId},update_time = #{updateTime} where id = #{id}")
+    @Update("update borrow set user_id = #{userId},book_id = #{equipmentId},update_time = #{updateTime} where id = #{id}")
     int updateBorrow(Borrow borrow);
 
-    @Select("select * from borrow where user_id = #{userId} and equipment_id = #{eqId}")
-    Borrow findBorrowByUserIdAndEquipmentId(@Param("userId") Integer userId, @Param("bookId") Integer eqId);
+    @Select("select * from borrow where user_id = #{userId} and equipment_id = #{equipmentId}")
+    Borrow findBorrowByUserIdAndEquipmentId(@Param("userId") Integer userId, @Param("equipmentId") Integer equipmentId);
 
     int updateBor(Map<String, Object> map);
 }

@@ -17,8 +17,8 @@
             <if test="userId != null">
                 user_id = #{userId},
             </if>
-            <if test="bookId != null">
-                book_id = #{bookId},
+            <if test="equipmentId != null">
+                equipment_id = #{equipmentId},
             </if>
             <if test="createTime != null">
                 create_time = #{createTime},

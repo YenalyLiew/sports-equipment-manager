@@ -39,7 +39,7 @@ public class BorrowService {
      */
     @Transactional
     public Integer addBorrow(Borrow borrow) {
-        Equipment equipment = equipmentService.findEquipment(borrow.getEquipmentId());
+        Equipment equipment = equipmentService.findEquipment(borrow.getId());
         Users users = userService.findUserById(borrow.getUserId());
 
         // 查询是否已经借阅过该图书
@@ -132,20 +132,20 @@ public class BorrowService {
      * 查询用户某一条借阅信息
      *
      * @param userId 用户id
-     * @param eqId 图书id
+     * @param equipmentId 图书id
      */
-    public Borrow findBorrowByUserIdAndEquipmentId(int userId, int eqId) {
-        return borrowMapper.findBorrowByUserIdAndEquipmentId(userId, eqId);
+    public Borrow findBorrowByUserIdAndEquipmentId(int userId, int equipmentId) {
+        return borrowMapper.findBorrowByUserIdAndEquipmentId(userId, equipmentId);
     }
 
     /**
      * 归还书籍, 使用事务保证 ACID
      *
      * @param userId 用户Id
-     * @param eqId 书籍id
+     * @param equipmentId 书籍id
      */
     @Transactional(rollbackFor = Exception.class)
-    public void retBook(int userId, int eqId) {
+    public void retEquipment(int userId, int equipmentId) {
         // 用户可借数量加1
         Users user = userService.findUserById(userId);
         Integer size = user.getSize();
@@ -155,13 +155,13 @@ public class BorrowService {
 
 
         // 书籍库存加1
-        Equipment equipment = equipmentService.findEquipment(eqId);
-        Integer bookSize = equipment.getSize();
-        bookSize++;
-        equipment.setSize(bookSize);
+        Equipment equipment = equipmentService.findEquipment(equipmentId);
+        Integer equipmentSize = equipment.getSize();
+        equipmentSize++;
+        equipment.setSize(equipmentSize);
         equipmentService.updateEquipment(equipment);
         // 借阅记录改为已归还,删除记录
-        Borrow borrow = this.findBorrowByUserIdAndEquipmentId(userId, eqId);
+        Borrow borrow = this.findBorrowByUserIdAndEquipmentId(userId, equipmentId);
 //        borrow.setRet(Constants.YES);
 //        borrow.setUpdateTime(new Date());
 //        borrowMapper.updateBor(BeanUtil.beanToMap(borrow))>0;

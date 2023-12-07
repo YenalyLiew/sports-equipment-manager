@@ -33,7 +33,7 @@ public class Borrow {
     private Integer userId;
 
     @ApiModelProperty("器材ID")
-    private Integer equipmentId;
+    private String equipmentId;
 
     @ApiModelProperty("借用时间")
     private Date createTime;

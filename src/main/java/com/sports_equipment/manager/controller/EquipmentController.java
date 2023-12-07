@@ -54,8 +54,8 @@ public class EquipmentController {
     }
 
     @ApiOperation("器材详情 根据ISBN获取")
-    @GetMapping("/detailByIsbn")
-    public R equipmentDetailByIsbn(String isbn) {
+    @GetMapping("/detailByEquipmentId")
+    public R equipmentDetailByEquipmentId(String isbn) {
         return R.success(CodeEnum.SUCCESS, equipmentService.findEquipmentByIsbn(isbn));
     }
 

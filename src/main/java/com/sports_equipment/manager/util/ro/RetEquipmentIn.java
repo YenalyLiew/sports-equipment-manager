@@ -15,5 +15,5 @@ public class RetEquipmentIn {
     private Integer userId;
 
     @ApiModelProperty("器材ID")
-    private Integer equipmentId;
+    private String equipmentId;
 }

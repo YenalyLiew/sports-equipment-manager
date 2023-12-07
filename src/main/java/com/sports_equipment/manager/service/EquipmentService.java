@@ -8,7 +8,6 @@ import com.sports_equipment.manager.dao.EquipmentMapper;
 import com.sports_equipment.manager.entity.Equipment;
 import com.sports_equipment.manager.repos.EquipmentRepository;
 import com.sports_equipment.manager.util.ro.PageIn;
-import com.sports_equipment.manager.util.vo.BookOut;
 import com.sports_equipment.manager.util.vo.EquipmentOut;
 import com.sports_equipment.manager.util.vo.PageOut;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,11 +58,11 @@ public class EquipmentService {
      * @param id 主键
      * @return 图书详情
      */
-    public BookOut findEquipmentById(Integer id) {
+    public EquipmentOut findEquipmentById(Integer id) {
         Optional<Equipment> optional = equipmentRepository.findById(id);
         if (optional.isPresent()) {
             Equipment equipment = optional.get();
-            BookOut out = new BookOut();
+            EquipmentOut out = new EquipmentOut();
             BeanUtil.copyProperties(equipment, out);
             out.setPublishTime(DateUtil.format(equipment.getPublishTime(), "yyyy-MM-dd"));
             return out;
@@ -83,7 +82,7 @@ public class EquipmentService {
      * @return
      */
     public EquipmentOut findEquipmentByIsbn(String isbn) {
-        Equipment equipment = equipmentRepository.findByEquipmentId(isbn);
+        Equipment equipment = equipmentRepository.findFirstByEquipmentId(isbn);
         EquipmentOut out = new EquipmentOut();
         if (equipment == null) {
             return out;
