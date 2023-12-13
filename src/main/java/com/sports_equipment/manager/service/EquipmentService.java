@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * @Description 图书业务类
+ * @Description 器材业务类
  * @Date 2020/7/14 16:31
  * @Author by 尘心
  */
@@ -35,8 +35,8 @@ public class EquipmentService {
     /**
      * 添加用户
      *
-     * @param equipment 图书
-     * @return 返回添加的图书
+     * @param equipment 器材
+     * @return 返回添加的器材
      */
     public Equipment addEquipment(Equipment equipment) {
         return equipmentRepository.saveAndFlush(equipment);
@@ -45,7 +45,7 @@ public class EquipmentService {
     /**
      * 编辑用户
      *
-     * @param equipment 图书对象
+     * @param equipment 器材对象
      * @return true or false
      */
     public boolean updateEquipment(Equipment equipment) {
@@ -53,10 +53,10 @@ public class EquipmentService {
     }
 
     /**
-     * 图书详情
+     * 器材详情
      *
      * @param id 主键
-     * @return 图书详情
+     * @return 器材详情
      */
     public EquipmentOut findEquipmentById(Integer id) {
         Optional<Equipment> optional = equipmentRepository.findById(id);
@@ -97,7 +97,7 @@ public class EquipmentService {
     }
 
     /**
-     * 删除图书
+     * 删除器材
      *
      * @param id 主键
      * @return true or false
@@ -108,7 +108,7 @@ public class EquipmentService {
 
 
     /**
-     * 图书搜索查询(mybatis 分页)
+     * 器材搜索查询(mybatis 分页)
      *
      * @param pageIn
      * @return

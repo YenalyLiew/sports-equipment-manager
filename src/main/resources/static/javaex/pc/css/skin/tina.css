@@ -287,8 +287,8 @@ input[type="radio"].fill:checked[disabled] ~ .fill-css, input[type="checkbox"].f
 	color: #6d757a;
 }
 .tab .tab-title li.current {
-	color: #23b8ff;
-	border-bottom: 1px solid #23b8ff;
+	color: #66ccff;
+	border-bottom: 1px solid #66ccff;
 }
 .tab .tab-title .more {
 	color: #909090;
@@ -297,13 +297,13 @@ input[type="radio"].fill:checked[disabled] ~ .fill-css, input[type="checkbox"].f
 	border-bottom: none;
 }
 .tab.tab-nav-top .tab-title li.current {
-	color: #23b8ff;
-	border-top-color: #23b8ff;
+	color: #66ccff;
+	border-top-color: #66ccff;
 	border-bottom: none;
 }
 .tab.tab-nav-bottom .tab-title li.current {
-	color: #23b8ff;
-	border-bottom: 4px solid #23b8ff;
+	color: #66ccff;
+	border-bottom: 4px solid #66ccff;
 }
 
 /*评分*/

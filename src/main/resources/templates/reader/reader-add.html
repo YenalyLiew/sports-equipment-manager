@@ -63,15 +63,15 @@
                 </div>
 
                 <div class="unit clear">
-                    <div class="left"><span class="required"></span>
+                    <div class="left"><span class="required">*</span>
                         <p class="subtitle">生日</p></div>
                     <div class="right">
-                        <input type="text" class="text" id="birthday" name="birthday"/>
+                        <input type="text" class="text" id="birthday" name="birthday"style="width: 180px;" value="" readonly/>
                     </div>
                 </div>
 
                 <div class="unit clear">
-                    <div class="left"><span class="required"></span>
+                    <div class="left"><span class="required">*</span>
                         <p class="subtitle">电话</p></div>
                     <div class="right">
                         <input type="text" class="text" id="tel" name="tel"/>
@@ -80,7 +80,7 @@
 
                 <!--下拉选择框-->
                 <div class="unit clear">
-                    <div class="left"><p class="subtitle">身份</p></div>
+                    <div class="left"><span class="required">*</span><p class="subtitle">身份</p></div>
                     <div class="right">
                         <select id="select">
                             <option value="">请选择</option>
@@ -93,7 +93,7 @@
                 </div>
 
                 <div class="unit clear">
-                    <div class="left"><span class="required"></span>
+                    <div class="left"><span class="required">*</span>
                         <p class="subtitle">邮箱</p></div>
                     <div class="right">
                         <input type="text" class="text" id="email" name="email"/>
@@ -101,7 +101,7 @@
                 </div>
 
                 <div class="unit clear">
-                    <div class="left"><span class="required"></span>
+                    <div class="left"><span class="required">*</span>
                         <p class="subtitle">地址</p></div>
                     <div class="right">
                         <input type="text" class="text" id="address" name="address"/>
@@ -109,7 +109,7 @@
                 </div>
 
                 <div class="unit clear">
-                    <div class="left"><span class="required"></span>
+                    <div class="left"><span class="required">*</span>
                         <p class="subtitle">可借数量</p></div>
                     <div class="right">
                         <input type="text" class="text" id="size" name="size"/>
@@ -136,6 +136,15 @@
     javaex.select({
         id: "select",
         isSearch: false
+    });
+
+    javaex.date({
+        id: "birthday",	// 承载日期组件的id
+        isTime: true,
+        date: "2023-04-15 01:01:01",	// 选择的日期
+        // 重新选择日期之后返回一个时间对象
+        callback: function (rtn) {
+        }
     });
 
     // 监听点击保存按钮事件
